@@ -48,6 +48,9 @@ app.use(hpp())
 app.use(cors())
 
 // Mount routers
+app.get('/', (req, res) => {
+    res.send('Backend Worked')
+})
 app.use('/api/v1/firms', firms)
 app.use('/api/v1/auth', auth)
 app.use('/api/v1/reports', reports)
