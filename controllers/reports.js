@@ -1,16 +1,19 @@
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
-const Report = require("../models/Reports");
+const Report = require('../models/Reports')
+const Firm = require('../models/Firms')
 
 // @desc      Get all reports
 // @route     GET /api/v1/reports/:id
 // @access    Public
 exports.getAllReports = asyncHandler(async (req, res, next) => {
-  const reports = await Report.find({ firm: req.params.id });
+  const reports = await Report.find({firm: req.params.id})
+  const firmName = await Firm.findById(req.params.id)
   res.status(200).json({
     success: true,
     count: reports.length,
     data: reports,
+    firmName: firmName?.name
   });
 });
 
